@@ -1,38 +1,48 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  text-align: center;
+}
+.header {
+  max-width: 60rem;
+  border: 2px solid teal;
+  background-color: aqua;
+
+  .list {
+    display: flex;
+    gap: 1rem;
+    list-style-type: none;
+    margin: 10px;
+  }
+  
+  .list a {
+    text-decoration: none;
+    color: var(--color-primary-400);
+  }
+  
+  .list a:hover,
+  .list a.active {
+    color: var(--color-primary-800);
+    text-decoration: underline;
+  }  
+}
+
+.todo-input{
+  display: flex;
+  align-items: flex-start ;
+  justify-content: flex-start;
+  flex-direction: column;
+  textarea {
+    padding: 1em;
+    margin: 1em;
+    width: 80%;
+  }
+  label {
+    margin-left: 1em;
+    font-size: larger;
+  }
+  button {
+    margin-left: auto;
+    margin-right: 15rem;
+  }
 }
 
 button {
@@ -41,10 +51,13 @@ button {
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
+  color: burlywood;
   transition: border-color 0.25s;
+  a{
+    color: burlywood;
+  }
 }
 button:hover {
   border-color: #646cff;
@@ -54,15 +67,13 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
+.todo-item {
+  padding: 1.5rem;
+  span {
+    border-bottom: 2px solid darkgreen;
   }
   button {
-    background-color: #f9f9f9;
+    float: right;
+    margin-right: 7.5em;
   }
 }
