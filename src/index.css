@@ -4,22 +4,27 @@ h1 {
 
 .center {
   text-align: center;
+  padding-left: 2.5rem;
 }
 .header {
   max-width: 60rem;
   border: 2px solid teal;
   background-color: aqua;
-
+  margin-right: auto;
+  margin-left: auto;
   .list {
     display: flex;
     gap: 1rem;
     list-style-type: none;
     margin: 10px;
+    justify-content: center;
+   
   }
 
   .list a {
     text-decoration: none;
     color: var(--color-primary-400);
+    margin: 2rem;
   }
 
   .list a:hover,
@@ -78,12 +83,9 @@ h1 {
 
   .todo-item {
     padding: 1.5rem;
-    span {
-      border-bottom: 2px solid darkgreen;
-    }
     button {
       float: right;
-      margin-right: 7.5em;
+      margin-right: 1em;
     }
   }
 }
@@ -102,4 +104,16 @@ h1 {
 }
 .d-flex {
   display: flex;
+}
+
+.tic-button {
+  font-weight: 800;
+  color: black;
+  font-size: larger;
+}
+
+.center-tic {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }

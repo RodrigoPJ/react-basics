@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { addNewTodo } from "../store/slice";
 
@@ -8,18 +8,20 @@ import { Todos } from "../components/Todos";
 
 export function TodoList() {
   const textArea = useRef();
-  const Dispatch = useDispatch();
+  const dispatch = useDispatch();
   const label = "Add your todos:";
-  function ButtonClick() {
+
+  function buttonClick() {
     const newItem = textArea.current.getValue();
-    Dispatch(addNewTodo(newItem));
+    if(!newItem) return;
+    dispatch(addNewTodo({content: newItem}));
     textArea.current.clear();
   }
   return (
     <>
       <h1>Todo list!</h1>
       <div className="todos">
-        <Input ref={textArea} label={label} click={ButtonClick} />
+        <Input ref={textArea} label={label} click={buttonClick} />
         <Todos />
       </div>
     </>

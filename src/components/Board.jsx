@@ -1,65 +1,66 @@
-import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { setNewBoard, startNewBoard, addMoveToLedger, resetMovesLedger, setTurn, resetTurn, resetPlayers } from '../store/slice';
 
-const initialBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-
-export function Board({ turn, setTurn, addMove, setUsers }) {
-  const [board, setBoard] = useState(initialBoard);
+export function Board({ winner }) {
+  const board = useSelector(state => state.todo.board);
+  const turn = useSelector(state => state.todo.turn)
+  const dispatch = useDispatch();
 
   function playerTurn(r, c) {
-    console.log(r, c);
-    setBoard((state) => {
-      const newState = [...state.map((e) => [...e])];
-      const player = turn;
-      newState[r][c] = player;
-      return newState;
-    });
-    setTurn((state) => {
-      if (state === "X") {
-        return "O";
-      } else {
-        return "X";
-      }
-    });
-    addMove((state) => {
-      const newState = [...state];
-      newState.push(`${r}, ${c}`);
-      return newState;
-    });
+    const player = turn;
+    dispatch(setNewBoard({r,c,player}));
+    dispatch(addMoveToLedger(`Player: ${player}, move:${r}, ${c}`));
+    dispatch(setTurn());
   }
 
   function reset() {
-    setBoard(initialBoard);
-    addMove([]);
-    setTurn("X");
-    setUsers({});
+    dispatch(startNewBoard());
+    dispatch(resetMovesLedger());
+    dispatch(resetTurn());
+    dispatch(resetPlayers());
   }
+
+  function buttonBoardStyle(rowIndex, colIndex) {
+    const style = {};
+    if (rowIndex === 0){
+      style.borderTopStyle = 'hidden';
+    } if ( rowIndex === 2){
+      style.borderBottomStyle = 'hidden';
+    } if ( colIndex === 0){
+      style.borderLeftStyle = 'hidden';
+    } if ( colIndex === 2){
+      style.borderRightStyle = 'hidden';
+    }
+    return style;
+  }
+
   return (
-    <div className="board">
+    <>
       <p className="center">
-        <button onClick={reset}>Reset</button>
+          <button onClick={reset}>Reset</button>
       </p>
-      {board.map((row, rowIndex) => {
-        return (
-          <ul key={rowIndex}>
-            {row.map((col, colIndex) => {
-              return (
-                <li key={colIndex}>
-                  <button
-                    onClick={() => playerTurn(rowIndex, colIndex)}
-                    className="tic-button"
-                  >
-                    {col}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        );
-      })}
-    </div>
+      <div className="board">
+        {board.map((row, rowIndex) => {
+          return (
+            <ul key={rowIndex}>
+              {row.map((col, colIndex) => {
+                return (
+                  <li key={colIndex}>
+                    <button
+                      onClick={() => playerTurn(rowIndex, colIndex)}
+                      className="tic-button"
+                      disabled={col || winner}
+                      style={buttonBoardStyle(rowIndex, colIndex)}
+                    >
+                      {col}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          );
+        })}
+      </div>
+    </>
   );
 }
