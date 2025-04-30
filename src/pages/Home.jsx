@@ -17,8 +17,11 @@ export function Home() {
       <button style={{ margin: "10px" }}>
         <Link to={"todo"}>Todo list</Link>
       </button>
-      <button>
+      <button style={{ margin: "10px" }}>
         <Link to={"tictactoe"}>Tic tac toe</Link>
+      </button>
+      <button style={{ margin: "10px" }}>
+        <Link to={"products"}>Products</Link>
       </button>
       {!user && (
         <div>

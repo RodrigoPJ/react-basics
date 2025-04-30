@@ -16,6 +16,9 @@ export function Header() {
           <li>
             <NavLink to="tictactoe">Tic Tac Toe</NavLink>
           </li>
+          <li>
+            <NavLink to="products">Products</NavLink>
+          </li>
         </ul>
         {username && <h3 style={{textAlign: "right"}} >User: {username}</h3>}
       </nav>
