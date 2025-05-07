@@ -10,7 +10,7 @@ export function Todos() {
 
   useEffect(()=>{
     async function getTodoList() {
-      const response = await fetch('https://basic-be-default-rtdb.firebaseio.com/'+username+'.json' , {
+      const response = await fetch("https://basic-be-ec0e8-default-rtdb.firebaseio.com/" + username + ".json" , {
         method: 'GET',
       });
       if (!response.ok) {

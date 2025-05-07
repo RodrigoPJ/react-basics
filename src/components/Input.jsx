@@ -3,6 +3,7 @@ import {
   useEffect,
   useImperativeHandle,
   useRef,
+  useState
 } from "react";
 import { useSelector } from "react-redux";
 
@@ -10,10 +11,13 @@ export const Input = forwardRef(({ label, click }, ref) => {
   const textArea = useRef();
   const list = useSelector((state) => state.todo.todos);
   const username = useSelector((state) => state.todo.username);
+  const [save, setSave] = useState(false);
+  const isInitial = useRef(true);
 
-  async function saveData() {
+  useEffect (() => {
+    async function saveData() {
     const request = await fetch(
-      "https://basic-be-default-rtdb.firebaseio.com/" + username + ".json",
+      "https://basic-be-ec0e8-default-rtdb.firebaseio.com/" + username + ".json",
       {
         method: "PUT",
         body: JSON.stringify({list}),
@@ -21,6 +25,20 @@ export const Input = forwardRef(({ label, click }, ref) => {
     );
     return request;
   }
+
+  try {
+    if (!isInitial.current) {
+      console.log('saving');
+      
+      saveData();
+    }
+
+  } catch (e) {
+    throw new Error(e.message);
+  }
+  isInitial.current = false
+  }, [save])
+  
   
   useImperativeHandle(ref, () => {
     return {
@@ -35,7 +53,7 @@ export const Input = forwardRef(({ label, click }, ref) => {
 
   function saveList() {
     if (username && list) {
-      saveData().then();
+      setSave(!save);
     }
   }
 

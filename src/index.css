@@ -117,3 +117,36 @@ h1 {
   justify-content: center;
   flex-direction: column;
 }
+
+
+.stop-light {
+  border: 6px solid black;
+  height: 400px;
+  width: 150px;
+  margin: auto;
+  margin-top: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: darkgrey;
+
+  .bulb {
+    border: 3px solid black;
+    height: 100px;
+    width: 100px;
+    margin: 10px;
+    border-radius: 50%;
+  }
+}
+
+.stop-light-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  button {
+    font-size: x-large;
+    padding-inline: 15px;
+    font-weight: 600;
+  }
+}

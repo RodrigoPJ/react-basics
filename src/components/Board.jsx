@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { setNewBoard, startNewBoard, addMoveToLedger, resetMovesLedger, setTurn, resetTurn, resetPlayers } from '../store/slice';
+import { useCallback } from 'react';
 
 export function Board({ winner }) {
   const board = useSelector(state => state.todo.board);
@@ -20,7 +21,9 @@ export function Board({ winner }) {
     dispatch(resetPlayers());
   }
 
-  function buttonBoardStyle(rowIndex, colIndex) {
+  const buttonBoardStyle = useCallback((rowIndex, colIndex) => {
+    console.log('callback executed');
+    
     const style = {};
     if (rowIndex === 0){
       style.borderTopStyle = 'hidden';
@@ -32,7 +35,7 @@ export function Board({ winner }) {
       style.borderRightStyle = 'hidden';
     }
     return style;
-  }
+  });
 
   return (
     <>
