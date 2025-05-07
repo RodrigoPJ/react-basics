@@ -19,7 +19,6 @@ export function StopLights() {
     function lights() {
       savedCb.current();
     }
-    console.log(lights.toString())
     
     if (interval.current) {
       clearInterval(interval.current);

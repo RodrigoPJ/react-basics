@@ -9,7 +9,6 @@ export function Username() {
 
  function logUserIn() {
   const username = input.current.value;
-  console.log(username);
   dispatch(setUsername(username));
   
  }

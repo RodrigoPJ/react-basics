@@ -15,7 +15,6 @@ export function Products() {
     "products",
     fetchProducts
   );
-  console.log(data);
   
   return (
     <>

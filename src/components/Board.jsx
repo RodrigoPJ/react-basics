@@ -22,8 +22,6 @@ export function Board({ winner }) {
   }
 
   const buttonBoardStyle = useCallback((rowIndex, colIndex) => {
-    console.log('callback executed');
-    
     const style = {};
     if (rowIndex === 0){
       style.borderTopStyle = 'hidden';

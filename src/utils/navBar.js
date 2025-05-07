@@ -15,4 +15,8 @@ export const pages = [
     name: 'Stop Lights',
     url: 'stoplights'
   },
+  {
+    name: 'Products',
+    url: 'products'
+  },
 ]

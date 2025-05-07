@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, } from "react";
 
 export function useSessionCache(key, fetcher) {
   const [isLoading, setIsLoading] = useState(false);

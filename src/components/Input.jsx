@@ -3,7 +3,7 @@ import {
   useEffect,
   useImperativeHandle,
   useRef,
-  useState
+  useState,
 } from "react";
 import { useSelector } from "react-redux";
 
@@ -14,32 +14,30 @@ export const Input = forwardRef(({ label, click }, ref) => {
   const [save, setSave] = useState(false);
   const isInitial = useRef(true);
 
-  useEffect (() => {
+  useEffect(() => {
     async function saveData() {
-    const request = await fetch(
-      "https://basic-be-ec0e8-default-rtdb.firebaseio.com/" + username + ".json",
-      {
-        method: "PUT",
-        body: JSON.stringify({list}),
-      }
-    );
-    return request;
-  }
-
-  try {
-    if (!isInitial.current) {
-      console.log('saving');
-      
-      saveData();
+      const request = await fetch(
+        "https://basic-be-ec0e8-default-rtdb.firebaseio.com/" +
+          username +
+          ".json",
+        {
+          method: "PUT",
+          body: JSON.stringify({ list }),
+        }
+      );
+      return request;
     }
 
-  } catch (e) {
-    throw new Error(e.message);
-  }
-  isInitial.current = false
-  }, [save])
-  
-  
+    try {
+      if (!isInitial.current) {
+        saveData();
+      }
+    } catch (e) {
+      throw new Error(e.message);
+    }
+    isInitial.current = false;
+  }, [save]);
+
   useImperativeHandle(ref, () => {
     return {
       clear() {
